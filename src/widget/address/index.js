@@ -8,7 +8,7 @@ var $ = require('jquery');
 var IScroll = require('iscroll');
 
 // 省市区数据
-var addressData = require('./data.json');
+var getAddressData = require('promise?bluebird!./data.json');
 
 var Address = function(o){
     this.__render(o);
@@ -110,13 +110,10 @@ Address.prototype = {
             , op = self.options
             , newSelected = op.newSelected
             ;
+        // 异步加载地区数据，减小入口文件大小
         setTimeout(function(){
-        // $.ajax({
-        //     url: op.url,
-        //     type: op.type,
-        //     dataType: 'json',
-        //     success: function(){
-                var data = addressData;
+            getAddressData().then(function(data){
+
                 var adapter = op.adapter;
                 // 格式化数据
                 if( $.isFunction( adapter ) ){
@@ -127,12 +124,8 @@ Address.prototype = {
                 self.__createProvinceTemplate();
                 self.__createCityTemplate();
                 self.__createAreaTemplate();
-        //     },
-        //     error: function () {
-        //         msg('获取地址失败');
-        //     }
-        // });
-        }, 0);
+            });
+        }, 100);
     },
     __eachLi: function ( ul, str, _is, cb ) {
         var li = ul.find('li')
