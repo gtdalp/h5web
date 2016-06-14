@@ -1,4 +1,6 @@
-require('./index.css');
+require('./index.styl');
+
+
 document.body.style.display = '';
 
 document.addEventListener('touchmove', function (e) {

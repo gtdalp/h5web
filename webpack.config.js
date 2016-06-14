@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var clean = require('gulp-clean');
 var copy = require('gulp-copy');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var debug = true;
 
 // 静态服务器
 var express = require('express');
@@ -56,7 +57,8 @@ module.exports = {
           filename: 'address.html',
           template: './src/page/address/index.html',
           chunks: ['address']
-        })
+        }),
+        new ExtractTextPlugin("[name].css")
     ],
     // 入口文件
     entry: {
@@ -77,6 +79,10 @@ module.exports = {
             { 
                 test: /\.css$/, 
                 loader: 'style-loader!css-loader'
+            },
+            {   
+                test: /\.styl$/, 
+                loader: 'style-loader!css-loader!stylus-loader' 
             },
             { 
                 test: /\.json$/, 
