@@ -9,8 +9,42 @@
     <link rel="stylesheet" href="css/comm.css">
 </head>
 <body>
-
-<a href="javascript:void(0);" id="click" style="font-size:24px;color:#666;position:absolute;top:50%;left:50%;margin:-50px 0 0 -70px;">省市区选择器</a>
-
+<style type="text/css">
+.select>li{
+    height:40px;
+    line-height:40px;
+    padding:0 15px;
+    border-bottom:1px solid #ccc;
+    font-size:14px;
+}
+.select>li>label{
+    margin-right:10px;
+}
+.select>li>span{
+    display:block;
+    position: relative;
+    padding-right:20px;
+    text-align:right;
+    overflow:hidden;
+    color:#999;
+}
+.select>li>span::after{
+    position:absolute;
+    top:1px;
+    right:0;
+    font-family:'iconfont';
+    content:'\e602';
+}
+</style>
+<ul class="select">
+    <li>
+        <label class="l">默认地址</label>
+        <span class="textOverflow" id="default-address"></span>
+    </li>
+    <li>
+        <label class="l">收货地址</label>
+        <span class="textOverflow" id="receipt-address"></span>
+    </li>
+</ul>
 </body>
 </html>
